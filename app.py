@@ -30,17 +30,17 @@ def home():
 @app.post("/add")
 def add():
     user = []    
-    nome  = request.form.get("nome")
-    fone  = request.form.get("fone")
-    email = request.form.get("email")
-    if nome != '' and fone != '' and email != '':        
-        user.append(nome.strip())
-        user.append(fone.strip())
-        user.append(email.strip())
+    selecao  = request.form.get("selecao")
+    continente  = request.form.get("continente")
+    titulos = request.form.get("titulos")
+    if selecao != '' and continente != '' and titulos != '':        
+        user.append(selecao.strip())
+        user.append(continente.strip())
+        user.append(titulos.strip())
         lista.append(user)        
         print(f'Add: {lista}')                     
     else:
-        print('** Usuario nao cadastrato, todos os dados devem ser fornecidos **')    
+        print('** seleção não encontrada **')    
     return redirect(url_for("home"))
 
 
@@ -70,11 +70,11 @@ def clear():
 
 
 @app.get("/delete/<lista_nome>")
-def delete(lista_nome):
-    nome = lista_nome
-    print(f'==> Removendo: {nome}')
+def delete(lista_selecao):
+    selecao = lista_selecao
+    print(f'==> Removendo: {selecao}')
     for i in range(len(lista)):
-        if nome in lista[i]:            
+        if selecao in lista[i]:            
             del lista[i]
             break   
     return redirect(url_for("home"))
